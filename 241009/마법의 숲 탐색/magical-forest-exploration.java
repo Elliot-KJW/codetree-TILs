@@ -8,11 +8,11 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int row, col, k;
-        row = Integer.parseInt(st.nextToken());
-        col = Integer.parseInt(st.nextToken());
+        row = Integer.parseInt(st.nextToken()) + 2;
+        col = Integer.parseInt(st.nextToken()) + 1;
         k = Integer.parseInt(st.nextToken());
 
-        int[][] map = new int[row+2][col+2];
+        int[][] map = new int[row][col];
         int answer = 0;
 
         while(k-- > 0) {
@@ -25,7 +25,7 @@ public class Main {
             golem.go(map);
             for(int i : map[0]) {
                 if(i > 0) {
-                    map = new int[row+1][col+1];
+                    map = new int[row][col];
                     golem.reset();
                 }
             }
@@ -56,7 +56,7 @@ public class Main {
             if(r > 2) {
                 return new Point(this.r - 1, this.c);  
             } else {
-                return new Point(0, this.c); 
+                return new Point(0, 0); 
             }
         }
 
@@ -64,7 +64,7 @@ public class Main {
             while(true) {
                 if(r+2 < map.length && map[r+2][c] == 0 && map[r+1][c+1] == 0 && map[r+1][c-1] == 0) {
                     r++;
-                } else if(r+2 < map.length && c-2 >= 1 && map[r-1][c-1] == 0 && map[r][c-2] == 0 && map[r+1][c-1] == 0 && map[r+2][c-1] == 0 && map[r+1][c-2] == 0){
+                } else if(r+2 < map.length && c-2 > 0 && map[r-1][c-1] == 0 && map[r][c-2] == 0 && map[r+1][c-1] == 0 && map[r+2][c-1] == 0 && map[r+1][c-2] == 0){
                     r++;
                     c--;
                     di = (di+3) % 4;
@@ -106,6 +106,7 @@ public class Main {
                                 visited[nr][nc] = true;
                                 move = map[cr][cc] == 2 ? -1 : move+1;
                                 queue.offer(new int[]{nr, nc, move});
+                                //System.out.println(nr + " " + nc + " " + move);
                                 r = Math.max(r, nr);
                             }
                         }
