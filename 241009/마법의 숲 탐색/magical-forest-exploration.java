@@ -23,15 +23,18 @@ public class Main {
 
             Golem golem = new Golem(c, d);
             golem.go(map);
-            for(int i : map[0]) {
+            for(int i : map[1]) {
                 if(i > 0) {
                     map = new int[row][col];
                     golem.reset();
                 }
             }
             answer += golem.getPosition().x;
-            /*for(int[] x : map) {
-                System.out.println(Arrays.toString(x));
+            /*for(int i = 2; i < map.length; i++) {
+                for(int j = 1; j < map[0].length; j++) {
+                    System.out.print(map[i][j]);
+                }
+                System.out.println();
             }
             System.out.println(golem.getPosition().x);
             System.out.println();*/
