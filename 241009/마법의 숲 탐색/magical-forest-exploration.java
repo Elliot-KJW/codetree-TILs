@@ -12,7 +12,7 @@ public class Main {
         col = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
 
-        int[][] map = new int[row+1][col+1];
+        int[][] map = new int[row+2][col+2];
         int answer = 0;
 
         while(k-- > 0) {
@@ -30,6 +30,11 @@ public class Main {
                 }
             }
             answer += golem.getPosition().x;
+            /*for(int[] x : map) {
+                System.out.println(Arrays.toString(x));
+            }
+            System.out.println(golem.getPosition().x);
+            System.out.println();*/
         }
 
         System.out.println(answer);
@@ -48,7 +53,11 @@ public class Main {
         }
 
         Point getPosition() {
-            return new Point(this.r, this.c);  
+            if(r > 2) {
+                return new Point(this.r - 1, this.c);  
+            } else {
+                return new Point(0, this.c); 
+            }
         }
 
         void go(int[][] map) {
