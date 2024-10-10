@@ -7,7 +7,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int r, c, k;
-        r = Integer.parseInt(st.nextToken()) + 2;
+        r = Integer.parseInt(st.nextToken()) + 3;
         c = Integer.parseInt(st.nextToken()) + 1;
         k = Integer.parseInt(st.nextToken());
 
@@ -22,7 +22,7 @@ public class Main {
 
             Golem golem = new Golem(ci, di);
             golem.go(map);
-            for(int i : map[1]) {
+            for(int i : map[2]) {
                 if(i > 0) {
                     map = new int[r][c];
                     golem.reset();
@@ -49,7 +49,7 @@ public class Main {
         }
 
         int getRow() {
-            return r > 1 ? r - 1 : 0;
+            return r > 2 ? r - 2 : 0;
         }
 
         void go(int[][] map) {
@@ -103,7 +103,7 @@ public class Main {
         }
 
         void printMap(int[][] map) {
-            for(int i = 2; i < map.length; i++) {
+            for(int i = 3; i < map.length; i++) {
                 for(int j = 1; j < map[0].length; j++) {
                     System.out.print(map[i][j]);
                 }
