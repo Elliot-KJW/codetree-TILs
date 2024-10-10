@@ -31,7 +31,7 @@ public class Main {
     static class Golem{
         int r;
         int c;
-        int[][] d = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int[][] d = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
         int di;
 
         Golem(int ci, int di){
@@ -53,7 +53,8 @@ public class Main {
                     map[r+1][c] = 1;
                     map[r-1][c] = 1;
                     map[r][c+1] = 1;
-                    map[r][c-1] = 1; 
+                    map[r][c-1] = 1;
+                    map[r+d[di][0]][c+d[di][1]]+=2;
                     break;
                 }
             } 
