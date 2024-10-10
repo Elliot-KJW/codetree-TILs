@@ -22,7 +22,15 @@ public class Main {
 
             Golem golem = new Golem(ci, di);
             golem.go(map);
+            for(int i : map[0]) {
+                if(i > 0) {
+                    map = new int[r][c];
+                    golem.reset();
+                }
+            }
             answer += golem.getRow();
+            //golem.printMap(map);
+            //System.out.println(golem.getRow() + "\n\n");
         }
 
         System.out.println(answer);
@@ -41,14 +49,22 @@ public class Main {
         }
 
         int getRow() {
-            return r;
+            return r > 1 ? r - 1 : 0;
         }
 
         void go(int[][] map) {
             while(true) {
                 if(r+2 < map.length && map[r+2][c] == 0 && map[r+1][c+1] == 0 && map[r+1][c-1] == 0) {
                     r++;
-                } else {
+                } else if(r+2 < map.length && c-2 > 0 && map[r-1][c-1] == 0 && map[r][c-2] == 0 && map[r+1][c-1] == 0 && map[r+2][c-1] == 0 && map[r+1][c-2] == 0){
+                    r++;
+                    c--;
+                    di = (di+3) % 4;
+                } else if(r+2 < map.length && c+2 < map[0].length && map[r-1][c+1] == 0 && map[r][c+2] == 0 && map[r+1][c+1] == 0 && map[r+2][c+1] == 0 && map[r+1][c+2] == 0){
+                    r++;
+                    c++;
+                    di = (di+1) % 4;
+                }  else {
                     map[r][c] = 2;
                     map[r+1][c] = 1;
                     map[r-1][c] = 1;
@@ -57,9 +73,33 @@ public class Main {
                     map[r+d[di][0]][c+d[di][1]]+=2;
                     break;
                 }
-            } 
+            }
 
-            printMap(map);
+            Queue<int[]> queue = new LinkedList<>();
+            queue.offer(new int[]{r, c});
+            boolean[][] visited = new boolean[map.length][map[0].length];
+            visited[r][c] = true;
+
+            while(!queue.isEmpty()) {
+                int[] cur = queue.poll();
+
+                for(int i = 0; i < d.length; i++) {
+                    int cr = cur[0];
+                    int cc = cur[1];
+                    int nr = cr + d[i][0];
+                    int nc = cc + d[i][1];
+
+                    if(nr > 0 && nc > 0 && nr < map.length && nc < map[0].length && !visited[nr][nc]) {
+                        if((map[cr][cc] == 2 && map[cr][cc] > 0) || (map[cr][cc] == 3 && map[nr][nc] == 1) 
+                        || (map[cr][cc] == 1 && map[nr][nc] == 2)) {
+                            queue.offer(new int[]{nr, nc});
+                            visited[nr][nc] = true;
+
+                            r = Math.max(r, nr);
+                        }
+                    }
+                }
+            }
         }
 
         void printMap(int[][] map) {
@@ -70,6 +110,12 @@ public class Main {
                 System.out.println();
             }
             System.out.println();
+        }
+
+        void reset() {
+            r = 0;
+            c = 0;
+            di = 0;
         }
     }
 }
