@@ -90,7 +90,7 @@ public class Main {
                     int nc = cc + d[i][1];
 
                     if(nr > 0 && nc > 0 && nr < map.length && nc < map[0].length && !visited[nr][nc]) {
-                        if((map[cr][cc] == 2 && map[cr][cc] > 0) || (map[cr][cc] == 3 && map[nr][nc] == 1) 
+                        if((map[cr][cc] == 2 && map[cr][cc] > 0) || (map[cr][cc] == 3) 
                         || (map[cr][cc] == 1 && map[nr][nc] == 2)) {
                             queue.offer(new int[]{nr, nc});
                             visited[nr][nc] = true;
