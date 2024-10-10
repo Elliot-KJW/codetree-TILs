@@ -22,7 +22,7 @@ public class Main {
 
             Golem golem = new Golem(ci, di);
             golem.go(map);
-            for(int i : map[0]) {
+            for(int i : map[1]) {
                 if(i > 0) {
                     map = new int[r][c];
                     golem.reset();
@@ -43,7 +43,7 @@ public class Main {
         int di;
 
         Golem(int ci, int di){
-            r = 0;
+            r = 1;
             c = ci;
             this.di = di;
         }
